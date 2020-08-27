@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+script:
+  - docker build -t modulocloud .
+after_success:
+  - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+  - docker tag modulocloud $DOCKER_USER/modulocloud
+  - docker push $DOCKER_USER/modulocloud
